@@ -1,0 +1,25 @@
+//Specify AND Conditions
+//SELECT * FROM book WHERE  loan_amnt < 30
+//book: collection name
+db.book.find( {  loan_amnt : { $lt: 5000 } } )
+
+
+//Specify OR Conditions
+//SELECT * FROM book WHERE funded_amnt < A OR loan_amnt < 30
+
+db.book.find({ $or: [{ funded_amnt: { $lt: 2000 }},{ loan_amnt: { $lt: 2500 }}]})
+
+//Specify AND as well as OR Conditions
+//SELECT * FROM book WHERE grade = "A" AND ( loan_amnt < 5000 OR funded_amnt > 1000 )
+
+db.book.find( {
+     grade: "A",
+     $or: [ { loan_amnt: { $lt: 5000 } }, { funded_amnt : { $gt: 1000 }  } ]
+} )
+
+//Insert
+
+db.inventory.insertMany( [
+   { grade: "A", loan_amnt: 100, sub_grade: "A5" },
+   { grade: "C", funded_amnt: 500, sub_grade: "C3" }
+   ]);
